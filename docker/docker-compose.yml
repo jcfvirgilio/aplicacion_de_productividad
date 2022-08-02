@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  mysql:
+      image: mysql:5.7
+      container_name: mysql_container_productividad
+      restart: always
+      volumes:
+        - mysql_data:/var/lib/mysqls
+       # - ./database/data.sql:/docker-entrypoint-initdb.d/data.sql
+      networks:
+      - productividad-and-mysql-network
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: productividad
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: password
+      ports:
+      - 3308:3306
+  Tomcat:
+      image: tomcat
+      container_name: tomcat_container
+      volumes:
+       - ../deployment/build:/usr/local/tomcat/webapps/build
+      ports:
+        - 8082:8080
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: productividad
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: password
+      depends_on:
+        - mysql
+networks:
+  productividad-and-mysql-network:
