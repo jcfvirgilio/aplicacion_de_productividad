@@ -1,0 +1,5 @@
+/*se usa para el toolbar*/
+.toolbarRow {
+    display: flex;
+    gap: 0.5rem;
+}

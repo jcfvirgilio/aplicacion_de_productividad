@@ -1,0 +1,23 @@
+/* area del contenedor de carriles*/
+.board {
+    background-color: var(--backgroundBoard);
+    height: 63vh;
+    overflow: auto;
+    padding: 0rem 2rem 0rem 0rem;
+}
+
+/* comportamiento y espacio de la ul que funciona como contenedor de carriles*/
+.carriles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    list-style-type: none;
+}
+
+/* comportamiento y factor de crecimiento del li que funciona como wrapper para el carril*/
+.carriles-wrapper {
+    flex-grow: 1;
+    flex-direction: row;
+    box-shadow: 0 3px 10px #4848484e;
+}

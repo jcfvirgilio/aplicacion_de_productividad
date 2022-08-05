@@ -1,0 +1,24 @@
+.list {
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+/*estilo para font header de los carriles*/
+.name-header {
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+/*color para el carril en curso*/
+.name-0 {
+    background-color: var(--backgroundHeaderCarrilEnCurso);
+    color: var(--colorHeaderCarrilEnCurso);
+}
+
+/*color para el carril completada*/
+.name-1 {
+    background-color: var(--backgroundHeaderCarrilCompletada);
+    color: var(--colorHeaderCarrilCompletada);
+}

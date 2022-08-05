@@ -1,0 +1,143 @@
+/**
+* Normaliza line hight en todos los navegadores
+*
+**/
+
+
+
+* {
+    /* So 100% means 100% */
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+    font-size: 1rem;
+}
+
+
+body {
+    background-color: var(--body);
+    margin: 0.4rem 1rem 0rem 1rem;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/***** header and Nav **** */
+
+nav {
+    background-color: var(--header);
+    color: var(--colorfontheader);
+    border-bottom: 1px solid var(--borderheader);
+    font-size: 1.2rem;
+    height: 5rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+
+nav img {
+    filter: drop-shadow(0 0.2rem crimson);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    direction: rtl;
+    height: 1rem;
+    gap: 0.4rem;
+    padding: 0 1rem 0 0;
+    margin: 0;
+}
+
+nav ul:first-child {
+    display: flex;
+    list-style: none;
+    padding: 1rem 0.5rem;
+    direction: ltr;
+}
+
+nav ul:nth-child(2n) {
+    display: flex;
+    list-style: none;
+    padding-left: 6.5rem;
+    direction: ltr;
+}
+
+
+/***** Main *****/
+
+.container {
+    filter: drop-shadow(0 0 0.1rem crimson);
+}
+
+/**** MAIN **/
+/*se usa display:grid para lograr el footer*/
+main {
+    height: 85vh;
+    display: grid;
+
+}
+
+/**** Section  **/
+
+section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0rem;
+    padding: 0rem;
+    background-color: var(--backgroundcontent);
+    overflow: scroll;
+}
+
+/***** Footer *****/
+footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--footer);
+    color: var(--colorfontfooter);
+    padding-left: 1rem;
+}
+
+
+
+/**** label selected filter ****/
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    color: var(--fontColorSelectFilter) !important;
+}
+
+/**** label filter ****/
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+    color: var(--fontColorSelectFilter) !important;
+}
+
+/**** arrow filter ****/
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+    color: var(--fontColorSelectFilter) !important;
+}
+
+/*border fildset fitrol*/
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: 1px solid var(--backgroundSelectFilter) !important;
+}
+
+/*background tabs*/
+.css-enf8b4-MuiPaper-root-MuiAppBar-root {
+    background-color: var(--backgroundTabs) !important;
+}
+
+/*tab seleccionado*/
+.css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: var(--colorTabSelected) !important;
+}
+
+/*tab sin seleccionar*/
+.css-aym9vq-MuiButtonBase-root-MuiTab-root {
+    color: var(--colorTabUnSelected) !important;
+}

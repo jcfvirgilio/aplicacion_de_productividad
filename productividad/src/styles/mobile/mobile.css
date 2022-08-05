@@ -1,0 +1,31 @@
+/***** Mobile *****/
+
+@media (max-width: 600px) {
+
+    nav img {
+        width: 8rem;
+    }
+
+    .card {
+        height: 50vh;
+        width: 50vw !important;
+    }
+
+    nav ul:nth-child(1n) {
+        display: block;
+        font-size: 1rem;
+    }
+
+
+
+    /*size font para los tabs*/
+    .css-aym9vq-MuiButtonBase-root-MuiTab-root.Mui-selected,
+    .css-aym9vq-MuiButtonBase-root-MuiTab-root {
+        font-size: 0.5rem !important;
+    }
+
+
+    .carriles {
+        flex-direction: column;
+    }
+}

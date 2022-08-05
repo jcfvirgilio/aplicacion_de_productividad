@@ -1,0 +1,57 @@
+/****
+toggle theme 
+tema para el boton de cambiar el
+***/
+
+.m-switch {
+    --switch-color: var(--colorfontheader);
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.is-sr-only {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    word-wrap: normal;
+}
+
+.m-switch__icon {
+    fill: var(--switch-color);
+}
+
+/**
+controla anchura y altura del widget
+*/
+.m-switch__toggle {
+    width: 2rem;
+    padding: 0.2rem;
+    border: 1px solid var(--switch-color);
+    background-color: var(--backgroundcolorswitch);
+    margin: 0 0.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.5s;
+}
+
+.m-switch__toggle::after {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--switch-color);
+    border-radius: 0.5rem;
+    content: "";
+    transition: all 0.3s;
+}
+
+.m-switch__checkbox:checked+.m-switch__toggle::after {
+    transform: translateX(-200%);
+}

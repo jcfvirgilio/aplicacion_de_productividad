@@ -1,0 +1,108 @@
+:root {
+    --body: #FFEDE2;
+    --header: #F8FAFC;
+    --footer: #677C96;
+    --colorwhite: #FFFF;
+    --colorblack: #000;
+    --colorfontheader: #2D3948;
+    --colorfontfooter: #F0F4F8;
+    --backgroundcolorswitch: #BFCCDA;
+    --backgroundasidemenu: #F8FAFC;
+    --backgroundcontent: #f8f9fa;
+    --backgroundBottomNavigation: #F7F7F7;
+    --backgroundBoard: #F3F2EF;
+    --backgroundHeaderCarrilCompletada: #3ca558;
+    --colorHeaderCarrilCompletada: black;
+    --backgroundHeaderCarrilEnCurso: #9DADE0;
+    --colorHeaderCarrilEnCurso: black;
+    --backgroundTabs: #F5F5F5;
+    --colorTabSelected: #181918;
+    --colorTabUnSelected: gray;
+
+    --cardheader: #F7F7F7;
+    --cardheaderfont: #252525;
+    --carbody: #FFFFFF;
+    --cardborderbody: #EFEFEF;
+    --cardbordertopbody: #DEE0E7;
+    --cardbordertop: #a4acb8;
+
+    --backgroundSelectFilter: #C4C4C4;
+    --fontColorSelectFilter: black
+}
+
+:root.dark-theme {
+    --body: #111827;
+    --header: #111827;
+    --footer: #8799AF;
+    --colorwhite: #FFFF;
+    --colorblack: #000;
+    --colorfontheader: #6EBDB9;
+    --colorfontfooter: #E8E9EA;
+    --backgroundcolorswitch: #34455C;
+    --backgroundasidemenu: #111827;
+    --backgroundcontent: #111827;
+    --backgroundBottomNavigation: #29303D;
+    --backgroundBoard: #051e2e;
+    --backgroundHeaderCarrilCompletada: #022902;
+    --colorHeaderCarrilCompletada: aqua;
+    --backgroundHeaderCarrilEnCurso: #212C59;
+    --colorHeaderCarrilEnCurso: aqua;
+    --backgroundTabs: #0E111E;
+    --colorTabSelected: aqua;
+    --colorTabUnSelected: #848282;
+
+
+    --cardheader: #29303D;
+    --cardheaderfont: #FFFFFF;
+    --carbody: #1E293A;
+    --cardborderbody: black;
+    --cardbordertopbody: #324155;
+    --cardbordertop: #64748B;
+
+    --backgroundSelectFilter: #1976d2;
+    --fontColorSelectFilter: aqua
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body: #000000;
+        --header: #000000;
+        --footer: #087C87;
+        --colorwhite: #FFFF;
+        --colorblack: #000;
+        --colorfontheader: #6EBDB9;
+        --colorfontfooter: #E8E9EA;
+        --backgroundcolorswitch: #34455C;
+        --backgroundasidemenu: #000000;
+        --backgroundcontent: #000000;
+        --backgroundBottomNavigation: #191e26;
+        --backgroundBoard: #021622;
+        --backgroundHeaderCarrilCompletada: #022902;
+        --colorHeaderCarrilCompletada: aqua;
+        --backgroundHeaderCarrilEnCurso: #1c2756;
+        --colorHeaderCarrilEnCurso: aqua;
+        --backgroundTabs: black;
+        --colorTabSelected: aqua;
+
+
+
+        --cardheader: #1C1B22;
+        --cardheaderfont: #FFFFFF;
+        --carbody: #1E293A;
+        --cardborderbody: #1C1B22;
+        --cardbordertopbody: #324155;
+        --cardbordertop: #000000;
+
+        --backgroundSelectFilter: #1976d2;
+        --fontColorSelectFilter: aqua
+    }
+
+    nav img {
+        filter: brightness(2000%)
+    }
+}
+
+.dark-theme nav img {
+    filter: brightness(500%);
+}
