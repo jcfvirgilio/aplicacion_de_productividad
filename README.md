@@ -1,5 +1,4 @@
-# aplicacion_de_productividad
-Aplicación de Productividad
+# Aplicacion de Productividad
 
 #DOCKER
     #Prerequisitos, instalar docker y docker compose
@@ -16,4 +15,9 @@ Aplicación de Productividad
 
     Probar Instalación
         docker-compose --version
+#Theme CSS
+    Para cambiar el Tema he usado lo siguiente:
+    
+    No framework
+    clases puras en CSS
 
