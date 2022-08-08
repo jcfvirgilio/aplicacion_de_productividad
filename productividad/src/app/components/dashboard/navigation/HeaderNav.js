@@ -8,6 +8,7 @@ const MyHeaderNav = () => {
     */
     const [isThemeDark, setIsThemeDark] = useState(false)
 
+
     //useEffect forma similar a componentDidMount y componentDidUpdate
     useEffect(() => {
         document.documentElement.classList.toggle("dark-theme", isThemeDark);

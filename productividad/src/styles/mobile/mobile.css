@@ -6,9 +6,9 @@
         width: 8rem;
     }
 
-    .card {
+    .task {
         height: 50vh;
-        width: 50vw !important;
+        width: 100% !important;
     }
 
     nav ul:nth-child(1n) {
@@ -27,5 +27,6 @@
 
     .carriles {
         flex-direction: column;
+        width: 100% !important;
     }
 }

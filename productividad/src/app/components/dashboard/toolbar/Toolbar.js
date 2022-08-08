@@ -1,32 +1,46 @@
 import React, { useState } from "react";
+import { useForm } from 'react-hook-form'
 import { Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material/";
-import './toolbar.css'
-const Toolbar = () => {
+import AddTask from "../../board/addtask/AddTask";
+import './toolbar.css';
 
-    const [filter, setFilter] = useState(0)
+/***
+ * @param {onAdd} param se usa para agrega la tarea, es parametro por la funcion esta en el board 
+ * @returns void
+ */
+const Toolbar = ({ onAdd, numeroCarril }) => {
 
-    const handleChange = (event) => {
-        setFilter(event.target.value)
+    const { register, handleSubmit, } = useForm();
+
+
+    const [openAddTask, setOpenAddTask] = useState(false)
+
+    const handlerCloseAddTask = () => setOpenAddTask(false);
+    const handlerOpenAddTask = () => setOpenAddTask(true);
+
+    const handleChange = (data) => {
+        console.log("valor::", data.target.value)
+        console.log("nombre::", data.target.name)
     }
-
 
     return (
         <div className="toolbarRow">
-            <FormControl sx={{ m: 3, minWidth: 50 }}>
-                <Button variant="contained" >Crear Tarea</Button>
+            <AddTask onAdd={onAdd} numeroCarril={numeroCarril} onShow={openAddTask} onClose={handlerCloseAddTask} />
+            <FormControl sx={{ m: 2, minWidth: 50 }}>
+                <Button variant="contained" onClick={() => handlerOpenAddTask()}
+                    sx={{ maxWidth: '10rem', minWidth: '4rem' }}>Crear Tarea</Button>
             </FormControl>
-            <FormControl sx={{ m: 2, minWidth: 150 }}>
+            <FormControl onSubmit={handleSubmit(handleChange)} sx={{ m: 1, minWidth: 150 }}>
                 <InputLabel id="demo-controlled-open-select-label">Filtrar</InputLabel>
-                <Select
+                <Select {...register("filter")} sx={{ maxWidth: '15rem', minWidth: '0.5rem' }}
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={filter}
                     label="filter"
-                    onChange={handleChange}
+                    margin="dense"
+                    onChange={(e) => handleChange(e)}
                 >
                     <MenuItem value={30}>30min</MenuItem>
                     <MenuItem value={301}>30min a 1h</MenuItem>
-                    <MenuItem value={1}>más de 1h</MenuItem>
+                    <MenuItem value={0}>más de 1h</MenuItem>
                 </Select>
             </FormControl>
 

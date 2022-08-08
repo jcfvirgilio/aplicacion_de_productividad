@@ -18,14 +18,14 @@
     --backgroundTabs: #F5F5F5;
     --colorTabSelected: #181918;
     --colorTabUnSelected: gray;
-
     --cardheader: #F7F7F7;
     --cardheaderfont: #252525;
     --carbody: #FFFFFF;
     --cardborderbody: #EFEFEF;
     --cardbordertopbody: #DEE0E7;
     --cardbordertop: #a4acb8;
-
+    --colorTextCard: #595959;
+    --cardborderhoverleft: black;
     --backgroundSelectFilter: #C4C4C4;
     --fontColorSelectFilter: black
 }
@@ -50,15 +50,14 @@
     --backgroundTabs: #0E111E;
     --colorTabSelected: aqua;
     --colorTabUnSelected: #848282;
-
-
     --cardheader: #29303D;
     --cardheaderfont: #FFFFFF;
     --carbody: #1E293A;
     --cardborderbody: black;
     --cardbordertopbody: #324155;
     --cardbordertop: #64748B;
-
+    --colorTextCard: #028686;
+    --cardborderhoverleft: #04c4c4;
     --backgroundSelectFilter: #1976d2;
     --fontColorSelectFilter: aqua
 }
@@ -84,16 +83,14 @@
         --colorHeaderCarrilEnCurso: aqua;
         --backgroundTabs: black;
         --colorTabSelected: aqua;
-
-
-
         --cardheader: #1C1B22;
         --cardheaderfont: #FFFFFF;
         --carbody: #1E293A;
         --cardborderbody: #1C1B22;
         --cardbordertopbody: #324155;
         --cardbordertop: #000000;
-
+        --colorTextCard: #028686;
+        --cardborderhoverleft: #04c4c4;
         --backgroundSelectFilter: #1976d2;
         --fontColorSelectFilter: aqua
     }

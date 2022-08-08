@@ -1,9 +1,10 @@
 /* area del contenedor de carriles*/
 .board {
     background-color: var(--backgroundBoard);
-    height: 63vh;
+    height: 70vh;
     overflow: auto;
     padding: 0rem 2rem 0rem 0rem;
+    margin-left: -1rem;
 }
 
 /* comportamiento y espacio de la ul que funciona como contenedor de carriles*/

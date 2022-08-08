@@ -21,3 +21,7 @@
     No framework
     clases puras en CSS
 
+#Uso de Hooks
+    He usado los siguientes hooks:
+    
+    react-hook-form

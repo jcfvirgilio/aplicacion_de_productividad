@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Tabs, Tab, AppBar, Box } from '@mui/material';
+import { Tab, AppBar } from '@mui/material';
 import { TabContext, TabPanel, TabList } from '@mui/lab';
 import AccessAlarm from '@mui/icons-material/AccessAlarm'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
-import Toolbar from '../toolbar/Toolbar';
 import Board from '../../board/board/Board';
 
 const TabsNavigation = () => {
@@ -26,7 +25,6 @@ const TabsNavigation = () => {
                 </AppBar>
 
                 <TabPanel value={"admon"}>
-                    <Toolbar />
                     <Board />
                 </TabPanel>
                 <TabPanel value={"adinformesmon"}>Item dos</TabPanel>

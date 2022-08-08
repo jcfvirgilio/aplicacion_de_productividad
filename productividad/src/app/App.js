@@ -16,7 +16,7 @@ function App() {
         </section>
       </main>
       <footer>
-        &copy; 2022
+        &copy; 2022, Juan Carlos Fuentes
       </footer>
     </div>
   );

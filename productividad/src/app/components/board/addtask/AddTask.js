@@ -1,47 +1,55 @@
 import React from 'react';
+import { useForm } from 'react-hook-form'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import './addtask.css';
 
-export default class AddTaskForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editing: false
+
+/**
+ * 
+ * @param {onAdd} param se usa para agrega la tarea, es parametro por la funcion esta en el board 
+ * @returns void
+ * 
+ * @param {onShow} param para mostrar el dialogo, lo controla el boton de agregar tarea que esta en el toolbar
+ * @returns void
+ * 
+ * @param {onClose} param para ocultar el dialogo, lo controla la función que esta en el toolbar
+ * @returns void
+ */
+const AddTask = ({ onAdd, numeroCarril, onShow, onClose }) => {
+
+    const { register, handleSubmit, setValue } = useForm();
+
+    const onTaskSubmit = (data) => {
+        if (data.taskName && onAdd) {
+            onAdd(data.taskName, numeroCarril);
         }
+        setValue("taskName", "")
+        onClose();
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-        const taskText = this.textInput.value.trim();
-        const listNumber = this.props.formNum;
-        console.log(listNumber)
-        if (taskText && this.props.onAdd) {
-            this.props.onAdd(taskText, listNumber);
-        }
-        this.textInput.value = '';
-    }
+    /*uso register del hook-form para hacer referencia dle input
+    * de esta forma el hook lleva el seguimiento de los cambios en el input
+    */
+    return (
+        <>
+            <Dialog open={onShow} onClose={() => onClose()} >
+                <DialogTitle>Agregar Nueva Tarea</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Nombre de la Tarea: </DialogContentText>
+                    <form className="card add-task-form" onSubmit={handleSubmit(onTaskSubmit)}>
+                        <input type="text" name="taskName" aria-label="Nueva Tarea"
+                            {...register("taskName", { required: true })}
+                        />
 
-    setEditing(editing) {
-        this.setState({
-            editing
-        });
-    }
-
-    render() {
-        if (!this.state.editing) {
-            return (
-                <div className="open-add-button" onClick={() => this.setEditing(true)}>
-                    <a href="#">Add a task!</a>
-                </div>
-            );
-        }
-        return (
-            <form className="card add-task-form" onSubmit={(e) => this.onSubmit(e)}>
-                <input type="text" class="task-input" ref={input => this.textInput = input} aria-label="Add a task" />
-                <div>
-                    <button className="button add-button">Add Task</button>
-                    <button className="button cancel-button" onClick={() => this.setEditing(false)}>Cancel</button>
-                </div>
-            </form>
-        );
-    }
+                        <DialogActions>
+                            <Button onClick={() => onClose()}>Cancelar</Button>
+                            <Button type="submit">Aceptar</Button>
+                        </DialogActions>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </>
+    )
 }
+
+export default AddTask;
