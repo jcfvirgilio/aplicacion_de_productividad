@@ -33,7 +33,7 @@ export default function TaskCard(props) {
                 onDragEnter={props.onDragEnter}
             >
                 <header className="task-header">
-                    <div className="task-title">Header</div>
+                    <div >{props.header}</div>
                     <div className="task-tools">
                         <MenuItem >
                             <EditRounded />

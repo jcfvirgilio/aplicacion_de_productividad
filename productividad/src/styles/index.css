@@ -143,7 +143,7 @@ footer {
     color: var(--colorTabUnSelected) !important;
 }
 
-/*colo de letra del "tiempo" en el card*/
+/*color de letra del "tiempo" en el card*/
 .css-4ca7ag-MuiButtonBase-root-MuiButton-root {
     color: var(--fontColorSelectFilter) !important;
 }
@@ -151,4 +151,15 @@ footer {
 /*size icones de las tareas*/
 .css-i4bv87-MuiSvgIcon-root {
     width: 1.1rem !important;
+}
+
+/*color para el popu de add task */
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    background-color: var(--backgroundPopupAddTask) !important;
+    color: var(--colorFontPopupAddTask) !important;
+}
+
+/*color inputs popup add task*/
+.MuiTextField-root {
+    background-color: var(--backgroundInputPopupAddTask) !important;
 }

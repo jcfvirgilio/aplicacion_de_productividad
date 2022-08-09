@@ -27,7 +27,10 @@
     --colorTextCard: #595959;
     --cardborderhoverleft: black;
     --backgroundSelectFilter: #C4C4C4;
-    --fontColorSelectFilter: black
+    --fontColorSelectFilter: black;
+    --backgroundPopupAddTask: #d1f8f8;
+    --colorFontPopupAddTask: black;
+    --backgroundInputPopupAddTask: white
 }
 
 :root.dark-theme {
@@ -59,7 +62,10 @@
     --colorTextCard: #028686;
     --cardborderhoverleft: #04c4c4;
     --backgroundSelectFilter: #1976d2;
-    --fontColorSelectFilter: aqua
+    --fontColorSelectFilter: aqua;
+    --backgroundPopupAddTask: #1E293A;
+    --colorFontPopupAddTask: aqua;
+    --backgroundInputPopupAddTask: #324561;
 }
 
 
@@ -92,7 +98,10 @@
         --colorTextCard: #028686;
         --cardborderhoverleft: #04c4c4;
         --backgroundSelectFilter: #1976d2;
-        --fontColorSelectFilter: aqua
+        --fontColorSelectFilter: aqua;
+        --backgroundPopupAddTask: #1E293A;
+        --colorFontPopupAddTask: aqua;
+
     }
 
     nav img {

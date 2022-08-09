@@ -19,6 +19,7 @@
     background-color: var(--cardheader);
     height: 5vh;
     color: var(--cardheaderfont);
+    font-weight: 800;
     align-items: center;
     padding: 1rem;
     display: flex;

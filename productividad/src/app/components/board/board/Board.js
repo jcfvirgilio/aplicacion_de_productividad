@@ -27,11 +27,13 @@ export default class Board extends Component {
                         title: 'En Curso',
                         id: 0,
                         cards: [{
+                            header: "Tarea 1",
                             taskText: 'Ejemplo',
                             numeroCarril: 0,
                             timeId: 1111
                         },
                         {
+                            header: "Tarea 2",
                             taskText: 'Tarea dos',
                             numeroCarril: 0,
                             timeId: 2222
@@ -41,11 +43,13 @@ export default class Board extends Component {
                         title: 'Concluidas',
                         id: 1,
                         cards: [{
+                            header: "Tarea 3",
                             taskText: 'Tarea 1 carril dos -id 2',
                             numeroCarril: 1,
                             timeId: 2
                         },
                         {
+                            header: "Tarea 4",
                             taskText: 'Tarea21 carril dos - id 3',
                             numeroCarril: 1,
                             timeId: 3
@@ -133,10 +137,11 @@ export default class Board extends Component {
     }
 
     //add some new task cards
-    addTaskCard(taskText, numeroCarril) {
+    addTaskCard(header, taskText, numeroCarril) {
         const lists = JSON.parse(localStorage.getItem('lists'));
 
         const newTask = {
+            header,
             taskText,
             numeroCarril,
             timeId: new Date().valueOf()
@@ -199,7 +204,7 @@ export default class Board extends Component {
 
         return (
             <div className="board">
-                <Toolbar onAdd={(taskText, numeroCarril) => this.addTaskCard(taskText, numeroCarril)} />
+                <Toolbar onAdd={(header, taskText, numeroCarril) => this.addTaskCard(header, taskText, numeroCarril)} />
                 <ul className="carriles">
                     {lists}
                 </ul>

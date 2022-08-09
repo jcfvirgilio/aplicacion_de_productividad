@@ -15,13 +15,20 @@
 
     Probar Instalación
         docker-compose --version
+
 #Theme CSS
-    Para cambiar el Tema he usado lo siguiente:
     
     No framework
-    clases puras en CSS
+    se usan clases puras en CSS
 
 #Uso de Hooks
-    He usado los siguientes hooks:
     
-    react-hook-form
+    useForm
+    useState
+
+#HTML 5
+
+    draggable
+    onDrop
+    onDragStart
+    onDragEnter
