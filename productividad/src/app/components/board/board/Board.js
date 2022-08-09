@@ -13,10 +13,6 @@ export default class Board extends Component {
 
     constructor(props) {
         super(props)
-        this.onDrop = this.onDrop.bind(this)
-        this.addTaskCard = this.addTaskCard.bind(this)
-        this.onDropEnterTask = this.onDropEnterTask.bind(this)
-
 
         if (localStorage.getItem('lists')) {
             const rawLS = localStorage.getItem('lists');
@@ -38,7 +34,7 @@ export default class Board extends Component {
                         {
                             taskText: 'Tarea dos',
                             numeroCarril: 0,
-                            timeId: 1
+                            timeId: 2222
                         }]
                     },
                     {
@@ -115,10 +111,6 @@ export default class Board extends Component {
         cards[temporalInfoTask.fromList].cards.splice(indexOfCard, 1)
 
 
-        //agrega el elemento en la posición final 
-        //cards[listNum].cards.push({ ...taskCard, numeroCarril: parseInt(listNum) })
-
-
         setTimeout(() => {
 
             //obtiene las tareas del carril de donde se soltara la tarea
@@ -162,6 +154,31 @@ export default class Board extends Component {
 
     }
 
+
+    onDelete = (id, numeroCarril) => {
+        alert(id)
+        alert('numeroCarril:' + numeroCarril)
+        //obtiene todas las listas de tareas
+        const tasks = JSON.parse(localStorage.getItem('lists'));
+
+        //obtiene las tareas del carril de la tarea a eliminar
+        let tasksArray = tasks[numeroCarril].cards
+
+        //filtra para eliminar la tarea
+        const tasksUpdate = tasksArray.filter(card => Number(card.timeId) !== Number(id))
+
+        //actualiza el carril donde estaba la tarea eliminada
+        tasks[numeroCarril].cards = tasksUpdate;
+
+        //actualiza el estado y el localstorage
+        this.setState({
+            lists: tasks
+        });
+
+        localStorage.setItem('lists', JSON.stringify(tasks));
+
+    }
+
     /**
      * 
      * @returns regresa los carriles con el toolbar y tareas creadas
@@ -174,6 +191,7 @@ export default class Board extends Component {
                     onDragOver={(e) => this.onDragOver(e)}
                     onDropEnterTask={(e) => this.onDropEnterTask(e)}
                     onDrop={(e, listNum) => { this.onDrop(e, `${list.id}`) }}
+                    onDelete={(e, listNum) => { this.onDelete(e, `${list.id}`) }}
                 />
             </li>
 

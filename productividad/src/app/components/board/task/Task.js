@@ -11,10 +11,15 @@ import './task.css';
 export default function TaskCard(props) {
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [id, setID] = useState(props.timeId)
+    const [numeroCarril] = useState(props.numeroCarril)
+
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+
+    const onClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
-    };
+    }
+
     const handleClose = () => {
         setAnchorEl(null);
     }
@@ -22,27 +27,24 @@ export default function TaskCard(props) {
 
     return (
         <>
-            <div className="task" draggable="true" id={[props.timeId]} title={props.numeroCarril}
-                onDrop={props.onDropEnterTask} onDragStart={props.onDragStart}
+            <div className="task" draggable="true" id={[id]} title={numeroCarril}
+                onDrop={props.onDropEnterTask}
+                onDragStart={props.onDragStart}
                 onDragEnter={props.onDragEnter}
             >
                 <header className="task-header">
                     <div className="task-title">Header</div>
                     <div className="task-tools">
-                        <MenuItem disableRipple>
+                        <MenuItem >
                             <EditRounded />
                         </MenuItem>
-                        <MenuItem disableRipple>
+                        <MenuItem onClick={() => props.onDelete(id, numeroCarril)} >
                             <Delete />
                         </MenuItem>
 
                         <MenuItem
-                            id="demo-customized-button"
-                            aria-controls={open ? 'demo-customized-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            variant="text"
-                            onClick={handleClick}
+                            aria-controls={open && ('demo-customized-menu')}
+                            onClick={onClickOpenMenu}
                         >
                             <AppSettingsAlt />
                             <ArrowDropDown />
@@ -55,15 +57,15 @@ export default function TaskCard(props) {
                             open={open}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose} disableRipple>
+                            <MenuItem onClick={handleClose} >
                                 <Pause />
                                 Pausar
                             </MenuItem>
-                            <MenuItem onClick={handleClose} disableRipple>
+                            <MenuItem onClick={handleClose} >
                                 <PlayArrow />
                                 Detener
                             </MenuItem>
-                            <MenuItem onClick={handleClose} disableRipple>
+                            <MenuItem onClick={handleClose} >
                                 <RestartAlt />
                                 Reiniciar
                             </MenuItem>

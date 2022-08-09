@@ -13,7 +13,9 @@ const Carril = (props) => {
     const cards = props.cards.map((card, index) => {
         return (
             <li key={index}>
-                <TaskCard {...card} onDragStart={props.onDragStart} onDropEnterTask={props.onDropEnterTask} />
+                <TaskCard {...card} onDragStart={props.onDragStart}
+                    onDropEnterTask={props.onDropEnterTask}
+                    onDelete={props.onDelete} />
             </li>
         );
     })
