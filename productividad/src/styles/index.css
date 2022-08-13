@@ -159,7 +159,13 @@ footer {
     color: var(--colorFontPopupAddTask) !important;
 }
 
-/*color inputs popup add task*/
+/*color title popup add task*/
 .MuiTextField-root {
     background-color: var(--backgroundInputPopupAddTask) !important;
+}
+
+/*color input text popup*/
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
+.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+    color: var(--colorFontPopupAddTask) !important;
 }

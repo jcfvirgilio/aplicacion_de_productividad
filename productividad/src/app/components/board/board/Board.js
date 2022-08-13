@@ -1,214 +1,183 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './board.css';
 import Carril from '../carriles/Carril';
 import Toolbar from '../../dashboard/toolbar/Toolbar';
-
+import useLocalStorage from '../../../hooks/useLocalStorage'
 
 /**
- * Board área de los carriles de las tareas
- * 
- * uso Component como ejemplo de conocimiento 
+ * A function that returns the board with the toolbar and the lanes created.
  */
-export default class Board extends Component {
+const Board = () => {
 
-    constructor(props) {
-        super(props)
+    const stateLanes = [
+        {
+            title: 'En Curso',
+            id: 0,
+            cards: [{
+                header: "Tarea 1",
+                taskText: 'Ejemplo',
+                numeroCarril: 0,
+                timeId: 1111
+            },
+            {
+                header: "Tarea 2",
+                taskText: 'Tarea dos',
+                numeroCarril: 0,
+                timeId: 2222
+            }]
+        },
+        {
+            title: 'Concluidas',
+            id: 1,
+            cards: [{
+                header: "Tarea 3",
+                taskText: 'Tarea 1 carril dos -id 2',
+                numeroCarril: 1,
+                timeId: 2
+            },
+            {
+                header: "Tarea 4",
+                taskText: 'Tarea21 carril dos - id 3',
+                numeroCarril: 1,
+                timeId: 3
+            }]
+        }
 
-        if (localStorage.getItem('lists')) {
-            const rawLS = localStorage.getItem('lists');
-            const parsedLS = JSON.parse(rawLS);
-            this.state = { lists: parsedLS }
-        } else {
-            this.state = {
-                idEnterElement: null,
-                carrilEnterElement: null,
-                lists: [
-                    {
-                        title: 'En Curso',
-                        id: 0,
-                        cards: [{
-                            header: "Tarea 1",
-                            taskText: 'Ejemplo',
-                            numeroCarril: 0,
-                            timeId: 1111
-                        },
-                        {
-                            header: "Tarea 2",
-                            taskText: 'Tarea dos',
-                            numeroCarril: 0,
-                            timeId: 2222
-                        }]
-                    },
-                    {
-                        title: 'Concluidas',
-                        id: 1,
-                        cards: [{
-                            header: "Tarea 3",
-                            taskText: 'Tarea 1 carril dos -id 2',
-                            numeroCarril: 1,
-                            timeId: 2
-                        },
-                        {
-                            header: "Tarea 4",
-                            taskText: 'Tarea21 carril dos - id 3',
-                            numeroCarril: 1,
-                            timeId: 3
-                        }]
-                    }
+    ]
+    const [lanes, setLanes] = useLocalStorage("lists", stateLanes)
+    const [temporalInfoTask, setTemporalInfoTask] = useLocalStorage("temporalInfoTask", null)
 
-                ]
+    const [enterElementID, setEnterElementID] = useState(null)
+    const [carrilEnterElement, setCarrilEnterElement] = useState(null)
+
+
+    /* The above code is a set of functions that are used to manipulate the data in the local storage. */
+    const dataEvent = {
+
+        addTaskCard: (header, taskText, numeroCarril) => {
+            const lists = JSON.parse(localStorage.getItem('lists'));
+            const newTask = {
+                header: header,
+                taskText: taskText,
+                numeroCarril: numeroCarril,
+                timeId: new Date().valueOf()
             }
+            lists[0].cards.unshift(newTask)
+            setLanes(lists)
+        },
 
-            localStorage.setItem('lists', JSON.stringify(this.state.lists))
+        onDrop: (e, listNum) => {
+            //obtiene la información del cache
+            const temporalInfoTask = JSON.parse(localStorage.getItem('temporalInfoTask'));
+            const cards = JSON.parse(localStorage.getItem('lists'));
+
+            //obtiene las tareas del carril de donde fue arrastrada la tarea
+            const cardsArray = cards[temporalInfoTask.fromList].cards
+
+            //verifica que exista la tarea 
+            const taskCard = cardsArray.find(card => (Number(card.timeId) === Number(temporalInfoTask.taskId)))
+
+            //encuentra el index de la tarea dentro del array
+            const indexOfCard = cardsArray.findIndex(card => Number(card.timeId) === Number(temporalInfoTask.taskId))
+
+            //elimina la tarea del array
+            cards[temporalInfoTask.fromList].cards.splice(indexOfCard, 1)
+
+
+            setTimeout(() => {
+
+                //obtiene las tareas del carril de donde se soltara la tarea
+                const cardsArrayDestiny = cards[carrilEnterElement].cards;
+
+                //obtiene el index de la tara destino donde entro el drag 
+                const indexOfCardDestiny = cardsArrayDestiny.findIndex(card => Number(card.timeId) === Number(enterElementID))
+
+                //inserta rn la posición indicada la tarea
+                cards[carrilEnterElement].cards.splice(indexOfCardDestiny, 0, { ...taskCard, numeroCarril: parseInt(carrilEnterElement) })
+
+                //sincroniza el estado y el localstorage
+
+                setLanes(cards)
+
+            }, 10)
+        },
+
+        onDragStart: (e, fromList) => {
+            console.log("entro en el onDragStart:", fromList)
+            const dragInfo = {
+                taskId: e.currentTarget.id,
+                fromList: fromList
+            }
+            setTemporalInfoTask(dragInfo)
+        },
+
+        onDropEnterTask: (e) => {
+            console.log("entro al onDropEnterTask::")
+            let id = Number(e.currentTarget.id)
+            let carril = Number(e.currentTarget.title)
+
+            setEnterElementID(id)
+            setCarrilEnterElement(carril)
+
+            e.preventDefault();
+
+        },
+
+        onDragEnter: (e) => {
+
+            let id = Number(e.currentTarget.id)
+            let carril = Number(e.currentTarget.title)
+
+            setEnterElementID(id)
+            setCarrilEnterElement(carril)
+
+            e.preventDefault();
+            console.log("entro al onDragEnter::", id, carril)
+        },
+
+        onDragOver: (e) => {
+            e.preventDefault();
+        },
+
+        /* Borra las tareas del local storage. */
+        onDelete: (id, numeroCarril) => {
+            const tasks = JSON.parse(localStorage.getItem('lists'));
+            let tasksArray = tasks[numeroCarril].cards
+            const tasksUpdate = tasksArray.filter(card => Number(card.timeId) !== Number(id))
+            tasks[numeroCarril].cards = tasksUpdate;
+            setLanes(tasks)
         }
-
-    }
-
-    //obtiene la información de la tarea que empezó el drag
-    onDragStart = (e, fromList) => {
-        const dragInfo = {
-            taskId: e.currentTarget.id,
-            fromList: fromList
-        }
-        localStorage.setItem('temporalInfoTask', JSON.stringify(dragInfo));
-    }
-
-    onDragOver = (e) => {
-        e.preventDefault();
-    }
-
-    onDropEnterTask = (e) => {
-
-        let id = Number(e.currentTarget.id)
-        let carril = Number(e.currentTarget.title)
-
-        this.setState({
-            "idEnterElement": id,
-            "carrilEnterElement": carril
-        })
-
-        e.preventDefault();
-    }
-
-
-    /**
-     * 
-     * @param {s} e objeto del evento generado del drop
-     * @param {*} listNum numero de la lista donde se soltará la tarea
-     */
-    onDrop = (e, listNum) => {
-
-        //obtiene la información del cache
-        const temporalInfoTask = JSON.parse(localStorage.getItem('temporalInfoTask'));
-        const cards = JSON.parse(localStorage.getItem('lists'));
-
-        //obtiene las tareas del carril de donde fue arrastrada la tarea
-        const cardsArray = cards[temporalInfoTask.fromList].cards
-
-        //verifica que exista la tarea 
-        const taskCard = cardsArray.find(card => (Number(card.timeId) === Number(temporalInfoTask.taskId)))
-
-        //encuentra el index de la tarea dentro del array
-        const indexOfCard = cardsArray.findIndex(card => Number(card.timeId) === Number(temporalInfoTask.taskId))
-
-        //elimina la tarea del array
-        cards[temporalInfoTask.fromList].cards.splice(indexOfCard, 1)
-
-
-        setTimeout(() => {
-
-            //obtiene las tareas del carril de donde se soltara la tarea
-            const cardsArrayDestiny = cards[this.state.carrilEnterElement].cards;
-
-            //obtiene el index de la tara destino donde entro el drag 
-            const indexOfCardDestiny = cardsArrayDestiny.findIndex(card => Number(card.timeId) === Number(this.state.idEnterElement))
-
-            //inserta rn la posición indicada la tarea
-            cards[this.state.carrilEnterElement].cards.splice(indexOfCardDestiny, 0, { ...taskCard, numeroCarril: parseInt(this.state.carrilEnterElement) })
-
-            //sincroniza el estado y el localstorage
-            this.setState({
-                lists: cards
-            });
-            localStorage.setItem('lists', JSON.stringify(cards));
-
-        }, 10)
-
-    }
-
-    //add some new task cards
-    addTaskCard(header, taskText, numeroCarril) {
-        const lists = JSON.parse(localStorage.getItem('lists'));
-
-        const newTask = {
-            header,
-            taskText,
-            numeroCarril,
-            timeId: new Date().valueOf()
-        }
-
-        //agrega la tarea al inicio del array 
-        lists[0].cards.unshift(newTask)
-
-        //sync state and localStorage
-        this.setState({
-            lists: lists
-        })
-
-        localStorage.setItem('lists', JSON.stringify(lists))
-
-    }
-
-
-    onDelete = (id, numeroCarril) => {
-        alert(id)
-        alert('numeroCarril:' + numeroCarril)
-        //obtiene todas las listas de tareas
-        const tasks = JSON.parse(localStorage.getItem('lists'));
-
-        //obtiene las tareas del carril de la tarea a eliminar
-        let tasksArray = tasks[numeroCarril].cards
-
-        //filtra para eliminar la tarea
-        const tasksUpdate = tasksArray.filter(card => Number(card.timeId) !== Number(id))
-
-        //actualiza el carril donde estaba la tarea eliminada
-        tasks[numeroCarril].cards = tasksUpdate;
-
-        //actualiza el estado y el localstorage
-        this.setState({
-            lists: tasks
-        });
-
-        localStorage.setItem('lists', JSON.stringify(tasks));
-
     }
 
     /**
-     * 
-     * @returns regresa los carriles con el toolbar y tareas creadas
+     * It takes the array of objects called lanes and maps over it, creating a list item for each object
+     * in the array
+     * @returns A list of carriles
      */
-    render() {
-        const lists = this.state.lists.map((list, index) => (
+
+    const createLanes = () => {
+        const lists = lanes.map((list, index) => (
             <li className="carriles-wrapper" key={index}>
-                <Carril {...list}
-                    onDragStart={(e, fromList) => this.onDragStart(e, `${list.id}`)}
-                    onDragOver={(e) => this.onDragOver(e)}
-                    onDropEnterTask={(e) => this.onDropEnterTask(e)}
-                    onDrop={(e, listNum) => { this.onDrop(e, `${list.id}`) }}
-                    onDelete={(e, listNum) => { this.onDelete(e, `${list.id}`) }}
-                />
+                <Carril id={list.id} title={list.title} cards={list.cards} />
             </li>
 
         ));
-
-        return (
-            <div className="board">
-                <Toolbar onAdd={(header, taskText, numeroCarril) => this.addTaskCard(header, taskText, numeroCarril)} />
-                <ul className="carriles">
-                    {lists}
-                </ul>
-            </div>
-        );
+        return lists
     }
+
+    /* Returning the board with the toolbar and the lanes created. */
+    return (
+        <div className="board">
+            <MyContext.Provider value={dataEvent}>
+                <Toolbar />
+                <ul className="carriles">
+                    {createLanes()}
+                </ul>
+            </MyContext.Provider>
+        </div>
+    );
+
 }
+
+export default Board;
+export const MyContext = React.createContext(null)

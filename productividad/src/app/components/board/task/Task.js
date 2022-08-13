@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { MenuItem, Menu } from '@mui/material';
 import { EditRounded, Delete, ArrowDropDown, AppSettingsAlt, Pause, PlayArrow, RestartAlt } from '@mui/icons-material';
+import FormAddTask from "../../board/FormAddtask/FormAddTask";
+import { MyContext } from '../board/Board';
+
+
 import './task.css';
 
 /**
- * 
- * @param {*} props se usa como ejemplo para demostrar que se pueden pasar argumentos sin nombre
- * @returns componente como tarea
+ * It's a function that returns a div with a header and a body as card
+ * @returns A component that is a card with a header and a body.
  */
-export default function TaskCard(props) {
 
+export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
+
+    const context = useContext(MyContext)
     const [anchorEl, setAnchorEl] = useState(null);
-    const [id, setID] = useState(props.timeId)
-    const [numeroCarril] = useState(props.numeroCarril)
+    const [openEditTask, setOpenEditTask] = useState(false)
+    const handlerCloseAddTask = () => setOpenEditTask(false);
+    const handlerOpenEditTask = () => setOpenEditTask(true);
+
+    const [configTask, setConfigTask] = useState({
+        title: 'Editar Tarea',
+        isEdit: true,
+        id: timeId,
+        carril: numeroCarril
+    })
 
     const open = Boolean(anchorEl);
 
@@ -25,30 +38,35 @@ export default function TaskCard(props) {
     }
 
 
+
+    /* It's a function that returns a div with a header and a body as Card */
     return (
         <>
-            <div className="task" draggable="true" id={[id]} title={numeroCarril}
-                onDrop={props.onDropEnterTask}
-                onDragStart={props.onDragStart}
-                onDragEnter={props.onDragEnter}
+            <div className="task" draggable="true" id={[timeId]} title={numeroCarril}
+                onDragStart={(e) => { context.onDragStart(e, numeroCarril) }}
+                onDragEnter={(e) => { context.onDragEnter(e) }}
+                onDrop={(e) => { context.onDropEnterTask(e) }}
             >
+
+                {openEditTask && <FormAddTask
+                    onShow={openEditTask}
+                    onClose={handlerCloseAddTask}
+                    config={configTask}
+                />}
+
                 <header className="task-header">
-                    <div >{props.header}</div>
+                    <div >{header}</div>
                     <div className="task-tools">
-                        <MenuItem >
+                        <MenuItem onClick={() => { handlerOpenEditTask() }}>
                             <EditRounded />
                         </MenuItem>
-                        <MenuItem onClick={() => props.onDelete(id, numeroCarril)} >
+                        <MenuItem onClick={() => context.onDelete(timeId, numeroCarril)} >
                             <Delete />
                         </MenuItem>
 
-                        <MenuItem
-                            aria-controls={open && ('demo-customized-menu')}
-                            onClick={onClickOpenMenu}
-                        >
+                        <MenuItem aria-controls={open && ('demo-customized-menu')} onClick={onClickOpenMenu}>
                             <AppSettingsAlt />
                             <ArrowDropDown />
-
                         </MenuItem>
 
                         <Menu
@@ -59,7 +77,7 @@ export default function TaskCard(props) {
                         >
                             <MenuItem onClick={handleClose} >
                                 <Pause />
-                                Pausar
+                                Pausarkoko
                             </MenuItem>
                             <MenuItem onClick={handleClose} >
                                 <PlayArrow />
@@ -74,7 +92,7 @@ export default function TaskCard(props) {
                     </div>
                 </header>
                 <div className="task-body">
-                    {props.taskText}
+                    {taskText}
                 </div>
 
             </div >
