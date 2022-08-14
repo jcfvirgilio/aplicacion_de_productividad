@@ -1,0 +1,15 @@
+.reports-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.reports-first {
+    height: 60vh;
+    display: flex;
+    margin: 0px 10px 3px 10px;
+    flex-grow: 1;
+    flex-direction: column;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}

@@ -17,12 +17,14 @@ const Board = () => {
                 header: "Tarea 1",
                 taskText: 'Ejemplo',
                 numeroCarril: 0,
+                startTime: 1,
                 timeId: 1111
             },
             {
                 header: "Tarea 2",
                 taskText: 'Tarea dos',
                 numeroCarril: 0,
+                startTime: 30,
                 timeId: 2222
             }]
         },
@@ -33,12 +35,14 @@ const Board = () => {
                 header: "Tarea 3",
                 taskText: 'Tarea 1 carril dos -id 2',
                 numeroCarril: 1,
+                startTime: 45,
                 timeId: 2
             },
             {
                 header: "Tarea 4",
                 taskText: 'Tarea21 carril dos - id 3',
                 numeroCarril: 1,
+                startTime: 60,
                 timeId: 3
             }]
         }
@@ -54,19 +58,32 @@ const Board = () => {
     /* The above code is a set of functions that are used to manipulate the data in the local storage. */
     const dataEvent = {
 
-        addTaskCard: (header, taskText, numeroCarril) => {
+        onGetData: (numeroCarril) => {
+
+            const cards = JSON.parse(localStorage.getItem('lists'))
+            const tasksArray = cards[numeroCarril].cards
+            return tasksArray
+
+        },
+        addTaskCard: (config) => {
+
             const lists = JSON.parse(localStorage.getItem('lists'));
+
             const newTask = {
-                header: header,
-                taskText: taskText,
-                numeroCarril: numeroCarril,
+                header: config.header,
+                taskText: config.taskText,
+                numeroCarril: config.numeroCarril,
+                startTime: config.startTime,
+                currentTime: config.config,
                 timeId: new Date().valueOf()
             }
             lists[0].cards.unshift(newTask)
             setLanes(lists)
+
         },
 
         onDrop: (e, listNum) => {
+
             //obtiene la información del cache
             const temporalInfoTask = JSON.parse(localStorage.getItem('temporalInfoTask'));
             const cards = JSON.parse(localStorage.getItem('lists'));
@@ -96,14 +113,14 @@ const Board = () => {
                 cards[carrilEnterElement].cards.splice(indexOfCardDestiny, 0, { ...taskCard, numeroCarril: parseInt(carrilEnterElement) })
 
                 //sincroniza el estado y el localstorage
-
                 setLanes(cards)
 
             }, 10)
+
         },
 
         onDragStart: (e, fromList) => {
-            console.log("entro en el onDragStart:", fromList)
+
             const dragInfo = {
                 taskId: e.currentTarget.id,
                 fromList: fromList
@@ -112,7 +129,7 @@ const Board = () => {
         },
 
         onDropEnterTask: (e) => {
-            console.log("entro al onDropEnterTask::")
+
             let id = Number(e.currentTarget.id)
             let carril = Number(e.currentTarget.title)
 
@@ -132,14 +149,62 @@ const Board = () => {
             setCarrilEnterElement(carril)
 
             e.preventDefault();
-            console.log("entro al onDragEnter::", id, carril)
+
         },
 
         onDragOver: (e) => {
             e.preventDefault();
         },
 
-        /* Borra las tareas del local storage. */
+        onUpdate: (data) => {
+
+            const cards = JSON.parse(localStorage.getItem('lists'))
+            const tasksArray = cards[data.numeroCarril].cards
+
+            const taskUpdate = {
+                header: data.header,
+                taskText: data.taskText,
+                numeroCarril: data.numeroCarril,
+                startTime: data.startTime,
+                currentTime: data.currentTime,
+                timeId: data.id
+            }
+            const taskToUpdateIndex = tasksArray.findIndex(card => Number(card.timeId) === Number(data.id))
+            cards[data.numeroCarril].cards[taskToUpdateIndex] = taskUpdate
+
+            setLanes(cards)
+
+        },
+
+        onTaskDone: ({ data }) => {
+            //obtiene la información del cache
+            const temporalInfoTask = JSON.parse(localStorage.getItem('temporalInfoTask'));
+            const cards = JSON.parse(localStorage.getItem('lists'));
+
+            //obtiene las tareas del carril se cumplio la tarea
+            const cardsArray = cards[0].cards
+
+            //verifica que exista la tarea 
+            const taskCard = cardsArray.find(card => (Number(card.timeId) === Number(data.id)))
+
+            //encuentra el index de la tarea dentro del array
+            const indexOfCard = cardsArray.findIndex(card => Number(card.timeId) === Number(data.id))
+
+            //elimina la tarea del array
+            cards[0].cards.splice(indexOfCard, 1)
+
+            console.log("taskCard::::", taskCard)
+            //inserta rn la posición indicada la tarea
+            cards[1].cards.unshift({ ...taskCard, numeroCarril: 1 })
+
+
+            //sincroniza el estado y el localstorage
+            setLanes(cards)
+
+
+
+        },
+
         onDelete: (id, numeroCarril) => {
             const tasks = JSON.parse(localStorage.getItem('lists'));
             let tasksArray = tasks[numeroCarril].cards

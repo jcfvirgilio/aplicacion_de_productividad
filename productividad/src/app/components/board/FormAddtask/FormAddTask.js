@@ -1,46 +1,73 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogTitle,
+    TextField, Select, MenuItem, InputLabel, FormControl
+} from '@mui/material';
+
 import { MyContext } from '../board/Board';
 import './addtask.css';
 
 const FormAddTask = ({ onShow, onClose, config }) => {
 
     const context = useContext(MyContext)
-    const { register, handleSubmit, setValue } = useForm();
-    const [isEditTask, setConfigTask] = useState(config.isEdit)
+    const { register, handleSubmit, setValue, getValues } = useForm();
+    const [valueTime, setValueTime] = React.useState(new Date());
 
     useEffect(() => {
+
         if (config.isEdit) {
             onGetData()
         }
+
     })
 
-    /**
-     * Obtiene los datos desde el form, agrega una nueva tarea y limpia el form
-     * @param data - datos fueton enviados por el form
-     */
     const onTaskSubmit = (data) => {
-        context.addTaskCard(data.taskName, data.taskDescription, 0)
+
+        const configTask = {
+            header: data.taskName,
+            taskText: data.taskDescription,
+            numeroCarril: 0,
+            startTime: data.duration,
+            cuerrentTime: data.currentTime
+        }
+        context.addTaskCard(configTask)
+
         setValue("taskName", "")
         setValue("taskDescription", "")
+        setValue("duration", "")
         onClose();
+
     }
 
     const onGetData = () => {
-        const cards = JSON.parse(localStorage.getItem('lists'))
-        const tasksArray = cards[config.carril].cards
+
+        const tasksArray = context.onGetData(config.carril)
         const tasksUpdate = tasksArray.filter(card => Number(card.timeId) === Number(config.id))
+
         setValue("taskName", tasksUpdate[0].header)
+        setValue("duration", tasksUpdate[0].startTime)
         setValue("taskDescription", tasksUpdate[0].taskText)
-        console.log(tasksUpdate)
+
     }
 
-    /**
-     *  El form es mostrado cuando el usuario da click en el boton "crear tarea"
-     * Uso register del hook-form para hacer referencia al nombre de los  input
-     * de esta forma el hook lleva el seguimiento de los cambios en el input
-    **/
+    const onUpdate = () => {
+
+        let dataUpdate = {
+            id: config.id,
+            header: getValues('taskName'),
+            taskText: getValues('taskDescription'),
+            startTime: getValues('duration'),
+            currentTime: 0,
+            numeroCarril: config.carril
+        }
+
+        context.onUpdate({ data: dataUpdate })
+        onClose();
+    }
+
+
+
     return (
         <>
             <Dialog open={onShow} onClose={() => onClose()} >
@@ -51,12 +78,26 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
                     <form className="card add-task-form" onSubmit={handleSubmit(onTaskSubmit)}>
 
-                        <TextField label="Tarea" name="taskName" aria-label="Nueva Tarea"
-                            {...register("taskName", { required: true })}
-                        />
+                        <TextField label="Tarea" name="taskName" {...register("taskName", { required: true })} />
                         <p></p>
 
-                        <TextField label="Descripción" name="taskDescription" aria-label="Descripción"
+                        <FormControl>
+                            <InputLabel id="demo-controlled-open-select-label">Duración</InputLabel>
+                            <Select {...register("duration")} sx={{ m: 1, minWidth: 220 }}
+                                labelId="demo-simple-select-label"
+                                label="filter"
+                                margin="dense"
+                                onChange={(e) => setValueTime(e.target.value)}
+                            >
+                                <MenuItem value={"30"}>30min</MenuItem>
+                                <MenuItem value={"45"}>45min</MenuItem>
+                                <MenuItem value={"60"}>1h</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <p></p>
+
+                        <TextField label="Descripción" name="taskDescription"
                             maxRows="5"
                             multiline
                             {...register("taskDescription", { required: true })}
@@ -64,7 +105,7 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
                         <DialogActions>
                             <Button onClick={() => onClose()}>Cancelar</Button>
-                            <Button type="submit">Aceptar</Button>
+                            {config.isEdit ? <Button onClick={() => onUpdate()}>Guardar</Button> : <Button type="submit">Aceptar</Button>}
                         </DialogActions>
 
                     </form>

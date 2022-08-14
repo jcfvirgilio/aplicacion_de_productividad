@@ -166,6 +166,9 @@ footer {
 
 /*color input text popup*/
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
-.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input,
+.css-10xlpvf-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root,
+.css-xmccdv-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
     color: var(--colorFontPopupAddTask) !important;
+    background-color: var(--backgroundInputPopupAddTask) !important;
 }

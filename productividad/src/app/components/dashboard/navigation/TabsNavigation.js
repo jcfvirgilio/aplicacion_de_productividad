@@ -4,6 +4,7 @@ import { TabContext, TabPanel, TabList } from '@mui/lab';
 import AccessAlarm from '@mui/icons-material/AccessAlarm'
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import Board from '../../board/board/Board';
+import TaskDone from '../../reports/tasksdone/TaskDone'
 
 const TabsNavigation = () => {
 
@@ -27,7 +28,9 @@ const TabsNavigation = () => {
                 <TabPanel value={"admon"}>
                     <Board />
                 </TabPanel>
-                <TabPanel value={"adinformesmon"}>Item dos</TabPanel>
+                <TabPanel value={"informes"}>
+                    <TaskDone />
+                </TabPanel>
             </TabContext>
         </>
     )

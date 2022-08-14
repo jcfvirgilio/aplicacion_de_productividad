@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { MenuItem, Menu } from '@mui/material';
 import { EditRounded, Delete, ArrowDropDown, AppSettingsAlt, Pause, PlayArrow, RestartAlt } from '@mui/icons-material';
 import FormAddTask from "../../board/FormAddtask/FormAddTask";
+import TimeTracker from '../../timetracker/TimeTracker';
 import { MyContext } from '../board/Board';
 
 
@@ -12,7 +13,7 @@ import './task.css';
  * @returns A component that is a card with a header and a body.
  */
 
-export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
+export default function TaskCard({ timeId, numeroCarril, header, taskText, startTime, currentTime }) {
 
     const context = useContext(MyContext)
     const [anchorEl, setAnchorEl] = useState(null);
@@ -24,6 +25,8 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
         title: 'Editar Tarea',
         isEdit: true,
         id: timeId,
+        startTime: startTime,
+        currentTime: currentTime,
         carril: numeroCarril
     })
 
@@ -37,6 +40,25 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
         setAnchorEl(null);
     }
 
+    const onChange = (val) => {
+        if (val === '00:00:00') {
+
+            let dataUpdate = {
+                id: timeId,
+                header: header,
+                taskText: taskText,
+                startTime: 0,
+                currentTime: 0,
+                numeroCarril: 1
+            }
+
+            context.onTaskDone({ data: dataUpdate })
+        }
+        // console.log("dentro de trask :", header, val === '00:00:00')
+    }
+    const saveTime = () => {
+
+    }
 
 
     /* It's a function that returns a div with a header and a body as Card */
@@ -57,11 +79,17 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
                 <header className="task-header">
                     <div >{header}</div>
                     <div className="task-tools">
+
                         <MenuItem onClick={() => { handlerOpenEditTask() }}>
                             <EditRounded />
                         </MenuItem>
+
                         <MenuItem onClick={() => context.onDelete(timeId, numeroCarril)} >
                             <Delete />
+                        </MenuItem>
+
+                        <MenuItem>
+                            <TimeTracker config={configTask} onChange={onChange} />
                         </MenuItem>
 
                         <MenuItem aria-controls={open && ('demo-customized-menu')} onClick={onClickOpenMenu}>
@@ -79,10 +107,12 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText }) {
                                 <Pause />
                                 Pausarkoko
                             </MenuItem>
+
                             <MenuItem onClick={handleClose} >
                                 <PlayArrow />
                                 Detener
                             </MenuItem>
+
                             <MenuItem onClick={handleClose} >
                                 <RestartAlt />
                                 Reiniciar
