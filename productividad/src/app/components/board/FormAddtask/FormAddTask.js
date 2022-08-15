@@ -8,6 +8,9 @@ import {
 import { MyContext } from '../board/Board';
 import './addtask.css';
 
+/**
+ * A function that returns a form to add a task.
+ */
 const FormAddTask = ({ onShow, onClose, config }) => {
 
     const context = useContext(MyContext)
@@ -22,6 +25,11 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
     })
 
+    /**
+     * It takes the data from the form, creates a new object with the data, and then passes that object
+     * to the addTaskCard function
+     * @param data - This is the data that is passed from the form.
+     */
     const onTaskSubmit = (data) => {
 
         const configTask = {
@@ -40,6 +48,10 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
     }
 
+    /**
+     * It takes the data from the context and filters it to only show the data that matches the id of
+     * the task that is being edited
+     */
     const onGetData = () => {
 
         const tasksArray = context.onGetData(config.carril)
@@ -51,8 +63,11 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
     }
 
+    /**
+     * It updates the task with the new values.
+     */
     const onUpdate = () => {
-
+        console.log("config::::", config)
         let dataUpdate = {
             id: config.id,
             header: getValues('taskName'),
@@ -68,6 +83,7 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
 
 
+    /* Returning a form to add a task. */
     return (
         <>
             <Dialog open={onShow} onClose={() => onClose()} >

@@ -6,6 +6,11 @@ import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomi
 import Board from '../../board/board/Board';
 import TaskDone from '../../reports/tasksdone/TaskDone'
 
+/**
+ * A function that returns a component that is a tab navigation.
+ * @returns The return is a component that is composed of a TabContext, an AppBar, a TabList, a
+ * TabPanel and a Board.
+ */
 const TabsNavigation = () => {
 
     const [value, setValue] = useState("admon")
@@ -14,6 +19,8 @@ const TabsNavigation = () => {
         setValue(newValue);
     };
 
+    /* Returning a component that is composed of a TabContext, an AppBar, a TabList, a
+     * TabPanel and a Board. */
     return (
         <>
             <TabContext value={value}>

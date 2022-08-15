@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
+/**
+ * A function that returns a navbar with a logo and a switch to change the theme of the page.
+ * @returns A navbar with a logo, a switch to change the theme and a button to change the language.
+ */
 const MyHeaderNav = () => {
-    /*
-    * Theme
-    *Devuelve un valor con estado (state) 
-    *y una función setter (setState) para actualizar el valor.
-    */
+
     const [isThemeDark, setIsThemeDark] = useState(false)
 
-
-    //useEffect forma similar a componentDidMount y componentDidUpdate
     useEffect(() => {
         document.documentElement.classList.toggle("dark-theme", isThemeDark);
     })
 
+    /* Returning a navbar with a logo, a switch to change the theme and a button to change the
+    language. */
     return (
         <>
             <nav>

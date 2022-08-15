@@ -32,14 +32,23 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText, start
 
     const open = Boolean(anchorEl);
 
+    /**
+     * When the user clicks on the menu button, the menu will open
+     * @param event - The event that triggered the function.
+     */
     const onClickOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
     }
+
 
     const handleClose = () => {
         setAnchorEl(null);
     }
 
+    /**
+     * A function that is called when the time is up.
+     * @param val - The current time of the timer.
+     */
     const onChange = (val) => {
         if (val === '00:00:00') {
 
@@ -56,6 +65,7 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText, start
         }
         // console.log("dentro de trask :", header, val === '00:00:00')
     }
+
     const saveTime = () => {
 
     }

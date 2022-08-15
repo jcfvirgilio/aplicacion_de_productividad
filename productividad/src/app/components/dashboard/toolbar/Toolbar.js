@@ -4,10 +4,11 @@ import { Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material
 import FormAddTask from "../../board/FormAddtask/FormAddTask";
 import './toolbar.css';
 
-/***
- * @param {onAdd} param se usa para agrega la tarea, es parametro por la funcion esta en el board 
- * @returns void
+/**
+ * A function that returns a component that is a toolbar that has a button to add a task and a select
+ * to filter the tasks.
  */
+
 const Toolbar = () => {
 
     const { register, handleSubmit, } = useForm();
@@ -24,6 +25,7 @@ const Toolbar = () => {
         console.log("valor::", data.target.value)
         console.log("nombre::", data.target.name)
     }
+
 
     return (
         <div className="toolbarRow">

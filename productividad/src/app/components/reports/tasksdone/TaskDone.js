@@ -8,6 +8,9 @@ const data = [
     { quarter: 4, earnings: 19000 }
 ];
 
+/**
+ * It returns a div with two VictoryCharts, each with a VictoryBar
+ */
 
 const TaskDone = () => {
     return (

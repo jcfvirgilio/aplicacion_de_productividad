@@ -168,7 +168,7 @@ const Board = () => {
             e.preventDefault();
         },
 
-        onUpdate: (data) => {
+        onUpdate: ({ data }) => {
 
             const cards = JSON.parse(localStorage.getItem('lists'))
             const tasksArray = cards[data.numeroCarril].cards
@@ -206,11 +206,7 @@ const Board = () => {
             cards[0].cards.splice(indexOfCard, 1)
 
             console.log("taskCard::::", taskCard)
-            //inserta rn la posición indicada la tarea
             cards[1].cards.unshift({ ...taskCard, numeroCarril: 1 })
-
-
-            //sincroniza el estado y el localstorage
             setLanes(cards)
 
 
