@@ -5,7 +5,7 @@ import moment from 'moment';
 const TimeTracker = ({ config, onChange }) => {
 
   let startTime = config.startTime
-  let start = moment().add(startTime, 's')
+  let start = moment().add(startTime, 'm')
 
   return (
     <label >

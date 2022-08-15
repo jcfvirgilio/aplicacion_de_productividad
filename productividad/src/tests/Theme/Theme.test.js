@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import App from '../../App.js';
+import App from '../../app/App.js';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import { RestoreIcon, FavoriteIcon } from '@mui/icons-material'
 
