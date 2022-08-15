@@ -7,17 +7,17 @@ import moment from 'moment';
  * second
  * @returns A React component that displays the time.
  */
-const TimeTracker = ({ config, onChange }) => {
+const TimeTrackerCustom = ({ config, handlerChange }) => {
 
   let startTime = config.startTime
   let start = moment().add(startTime, 'm')
 
   return (
-    <label >
-      <Moment date={start} format="hh:mm:ss" durationFromNow interval={1000} onChange={onChange} />
-    </label>
+
+    <Moment date={start} format="hh:mm:ss" durationFromNow interval={1000} onChange={handlerChange} />
+
   );
 
 };
 
-export default TimeTracker;
+export default TimeTrackerCustom;

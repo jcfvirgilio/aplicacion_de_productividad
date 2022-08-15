@@ -11,7 +11,7 @@ import './addtask.css';
 /**
  * A function that returns a form to add a task.
  */
-const FormAddTask = ({ onShow, onClose, config }) => {
+export default function FormAddTask({ onShow, onClose, config }) {
 
     const context = useContext(MyContext)
     const { register, handleSubmit, setValue, getValues } = useForm();
@@ -83,7 +83,6 @@ const FormAddTask = ({ onShow, onClose, config }) => {
 
 
 
-    /* Returning a form to add a task. */
     return (
         <>
             <Dialog open={onShow} onClose={() => onClose()} >
@@ -133,4 +132,3 @@ const FormAddTask = ({ onShow, onClose, config }) => {
     )
 }
 
-export default FormAddTask; 

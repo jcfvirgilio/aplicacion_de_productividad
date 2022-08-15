@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { MenuItem, Menu } from '@mui/material';
 import { EditRounded, Delete, ArrowDropDown, AppSettingsAlt, Pause, PlayArrow, RestartAlt } from '@mui/icons-material';
 import FormAddTask from "../../board/FormAddtask/FormAddTask";
-import TimeTracker from '../../timetracker/TimeTracker';
 import { MyContext } from '../board/Board';
 
 
@@ -98,9 +97,7 @@ export default function TaskCard({ timeId, numeroCarril, header, taskText, start
                             <Delete />
                         </MenuItem>
 
-                        <MenuItem>
-                            <TimeTracker config={configTask} onChange={onChange} />
-                        </MenuItem>
+
 
                         <MenuItem aria-controls={open && ('demo-customized-menu')} onClick={onClickOpenMenu}>
                             <AppSettingsAlt />

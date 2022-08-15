@@ -26,7 +26,8 @@ const Toolbar = () => {
         console.log("nombre::", data.target.name)
     }
 
-
+    /* Returning a component that is a toolbar that has a button to add a task and a select
+     * to filter the tasks. */
     return (
         <div className="toolbarRow">
 

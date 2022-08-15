@@ -3,7 +3,6 @@ import './styles/index.css';
 import './styles/toggle_theme/toggle.css';
 import './styles/mobile/mobile.css';
 
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 

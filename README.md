@@ -1,33 +1,56 @@
 # Aplicacion de Productividad
 
-#DOCKER
-    #Prerequisitos, instalar docker y docker compose
+## Install
+    #install docker and docker compose
 
-    Compose prerequisites
-        Docker Compose requiere Docker Engine.
-        Docker Compose plugin requiere Docker CLI.
-
-    Instalar Docker Engine (instalará Engine y CLI)
+    Intall Docker Engine (Engine y CLI)
         https://docs.docker.com/engine/install/
 
-    Instalar Docker Compose
+    Intall Docker Compose
         https://docs.docker.com/compose/install/
 
-    Probar Instalación
+    Test
         docker-compose --version
 
-#Theme CSS
+## Tech stack
+
+    - Web application based on React (LocalStorage) and Firebase (serverside)
+    - Clientside UI : material ui, css [flex, grid], Victory [charting] 
+    - State management : React Context
+    - Unit test : testing-library/jest-dom
+    - React Hooks
+    - Docker compose
+    - Tomcat
+
+## UP
+    
+    Inside the folder docker, write: compose-docker up
+
+## Developer Notes
+    
+    Runs the app in the production mode.
+    Open http://localhost:8082/build/ to view it your browser
+
+    If you change source code, you should use npm run build:linux or build:windows, this will send to build folder to tomcat
+
+## Theme CSS
     
     No framework
-    se usan clases puras en CSS
+    se usan  unicamente clases CSS
 
-#Uso de Hooks
+## Uso de Hooks
     
     useForm
     useState
+    useEffect
+    useContext
 
-#HTML 5
+## Custom Hook
 
+    useLocalStorage    
+
+## HTML 5
+    LocalStorage
     draggable
     onDrop
     onDragStart
