@@ -15,35 +15,47 @@ const Board = () => {
             id: 0,
             cards: [{
                 header: "Tarea 1",
-                taskText: 'Ejemplo',
+                taskText: 'Lorem ipsum dolor sit amet',
                 numeroCarril: 0,
                 startTime: 1,
                 timeId: 1111
             },
             {
                 header: "Tarea 2",
-                taskText: 'Tarea dos',
+                taskText: 'Duis aute irure dolor',
                 numeroCarril: 0,
                 startTime: 30,
                 timeId: 2222
+            }, {
+                header: "Tarea 3",
+                taskText: 'Duis aute irure dolor',
+                numeroCarril: 0,
+                startTime: 30,
+                timeId: 33
+            }, {
+                header: "Tarea 4",
+                taskText: 'Duis aute irure dolor',
+                numeroCarril: 0,
+                startTime: 30,
+                timeId: 44
             }]
         },
         {
             title: 'Concluidas',
             id: 1,
             cards: [{
-                header: "Tarea 3",
-                taskText: 'Tarea 1 carril dos -id 2',
+                header: "Tarea 5",
+                taskText: 'Ut enim ad minim veniam, ',
                 numeroCarril: 1,
                 startTime: 45,
-                timeId: 2
+                timeId: 55
             },
             {
-                header: "Tarea 4",
-                taskText: 'Tarea21 carril dos - id 3',
+                header: "Tarea 6",
+                taskText: 'Excepteur sint occaecat cupidatat',
                 numeroCarril: 1,
                 startTime: 60,
-                timeId: 3
+                timeId: 66
             }]
         }
 
