@@ -1,4 +1,6 @@
 # Productivity App
+![Uploading avance_jc.gif…]()
+
 
 ## Install
     #install docker and docker compose
@@ -21,6 +23,7 @@
     - React Hooks
     - Docker compose
     - Tomcat
+    - Mongo
 
 ## UP
     
