@@ -1,5 +1,9 @@
 # Productivity App
 
+
+![Uploading avance_jc.gif…]()
+
+
 ## Install
     #install docker and docker compose
 
@@ -21,6 +25,7 @@
     - React Hooks
     - Docker compose
     - Tomcat
+    - Mongo
 
 ## UP
     
@@ -36,7 +41,7 @@
 ## Theme CSS
     
     No framework
-    se usan  unicamente clases CSS
+    Only CSS3
 
 ## Uso de Hooks
     
