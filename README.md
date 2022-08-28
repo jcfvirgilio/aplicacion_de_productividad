@@ -1,8 +1,5 @@
 # Productivity App
 
-![avance_jc](https://user-images.githubusercontent.com/107664374/187084874-06e8b4d2-8d60-4d38-9f43-331d3fad107c.gif)
-
-
 ## Install
     #install docker and docker compose
 
