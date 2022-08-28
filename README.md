@@ -1,4 +1,4 @@
-# Aplicacion de Productividad
+# Productivity App
 
 ## Install
     #install docker and docker compose

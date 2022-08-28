@@ -5,35 +5,30 @@ volumes:
       driver: local
 
 services:
-  mysql:
-      image: mysql:5.7
-      container_name: mysql_container_productividad
-      restart: always
-      volumes:
-        - mysql_data:/var/lib/mysqls
-       # - ./database/data.sql:/docker-entrypoint-initdb.d/data.sql
-      networks:
-      - productividad-and-mysql-network
+  mongo:
+      image: mongo
+      container_name: mongo_container_productividad
+      restart: always      
       environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: productividad
-        MYSQL_USER: admin
-        MYSQL_PASSWORD: password
-      ports:
-      - 3308:3306
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: productividad
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: productividad
+      ME_CONFIG_MONGODB_URL: mongodb://root:productividad@mongo:27017/
   Tomcat:
       image: tomcat
       container_name: tomcat_container
       volumes:
-       - ../deployment/build:/usr/local/tomcat/webapps/build
+        - ../deployment/build:/usr/local/tomcat/webapps/build
       ports:
         - 8082:8080
-      environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: productividad
-        MYSQL_USER: admin
-        MYSQL_PASSWORD: password
       depends_on:
-        - mysql
+        - mongo
 networks:
-  productividad-and-mysql-network:
+  productividad-and-mongo-network:
