@@ -1,7 +1,8 @@
 # Productivity App
 
 
-![Uploading avance_jc.gif…]()
+![avance_jc](https://user-images.githubusercontent.com/107664374/187085585-b5f6272c-d803-4edb-b7e2-ec1a4f3b442c.gif)
+
 
 
 ## Install
